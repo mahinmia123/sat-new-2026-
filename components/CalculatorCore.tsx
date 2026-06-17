@@ -1,12 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calculator, CheckCircle2, ChevronDown, Menu } from 'lucide-react';
+import { Calculator, CheckCircle2, ChevronDown, Menu, X } from 'lucide-react';
 import { calculateSectionScore, getPercentile, getTier } from '@/lib/sat-utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 // --- SECTION 1: HEADER ---
 export function SiteHeader() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-[#E5E7EB] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -24,10 +27,28 @@ export function SiteHeader() {
           <a href="#faq" className="hover:text-[#0097A7] transition-colors">FAQ</a>
         </nav>
         
-        <button className="md:hidden text-[#0A2342] p-1">
-          <Menu size={24} />
+        <button className="md:hidden text-[#0A2342] p-1" onClick={toggleMenu}>
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-white border-b border-[#E5E7EB] overflow-hidden"
+          >
+            <nav className="flex flex-col px-6 py-4 gap-4 text-[15px] font-medium text-[#0A2342]">
+              <a href="#your-score" onClick={toggleMenu} className="hover:text-[#0097A7] transition-colors py-2 border-b border-gray-100">Score Chart</a>
+              <a href="#score-conversion-table" onClick={toggleMenu} className="hover:text-[#0097A7] transition-colors py-2 border-b border-gray-100">Score Table</a>
+              <a href="#college-match" onClick={toggleMenu} className="hover:text-[#0097A7] transition-colors py-2 border-b border-gray-100">College Match</a>
+              <a href="#faq" onClick={toggleMenu} className="hover:text-[#0097A7] transition-colors py-2">FAQ</a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
@@ -64,7 +85,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
 
   return (
     <>
-      <section className="bg-[#F0F4F8] pt-12 pb-20 px-4">
+      <section id="calculator" className="bg-[#F0F4F8] pt-12 pb-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:items-center">
           
           {/* Left Column: Hero Text */}

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { SiteHeader, CalculatorCore } from '@/components/CalculatorCore';
 import { ScoreDistributions, CollegeMatch, ScoreTiersVisual } from '@/components/DataVisuals';
 import { ConversionTables, PercentileTable } from '@/components/DataTables';
@@ -7,51 +8,93 @@ import { SuperscoreCalculator, TargetScoreCalculator, ActConverter } from '@/com
 import { EducationalContent, PolicyContent } from '@/components/InfoContent';
 import { FaqSection, RelatedCalculators, SiteFooter } from '@/components/FaqAndFooter';
 
+import { ScrollStepper } from '@/components/ScrollStepper';
+
+function Reveal({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const [calcStats, setCalcStats] = useState<any>(null);
 
   return (
     <>
       <SiteHeader />
+      <ScrollStepper />
       <main className="w-full">
         {/* Section 2 & 3 */}
-        <CalculatorCore onCalculate={setCalcStats} />
+        <Reveal>
+          <CalculatorCore onCalculate={setCalcStats} />
+        </Reveal>
         
         {/* Section 4 */}
-        <ScoreDistributions />
+        <Reveal>
+          <ScoreDistributions />
+        </Reveal>
         
         {/* Section 5 */}
-        <CollegeMatch baseScore={calcStats ? calcStats.total : 1240} />
+        <Reveal>
+          <CollegeMatch baseScore={calcStats ? calcStats.total : 1240} />
+        </Reveal>
         
         {/* Section 6 */}
-        <ScoreTiersVisual />
+        <Reveal>
+          <ScoreTiersVisual />
+        </Reveal>
         
         {/* Section 7 */}
-        <ConversionTables />
+        <Reveal>
+          <ConversionTables />
+        </Reveal>
         
         {/* Section 8 */}
-        <PercentileTable />
+        <Reveal>
+          <PercentileTable />
+        </Reveal>
         
         {/* Section 9 */}
-        <EducationalContent />
+        <Reveal>
+          <EducationalContent />
+        </Reveal>
         
         {/* Section 10 */}
-        <SuperscoreCalculator />
+        <Reveal>
+          <SuperscoreCalculator />
+        </Reveal>
         
         {/* Section 11 */}
-        <TargetScoreCalculator />
+        <Reveal>
+          <TargetScoreCalculator />
+        </Reveal>
         
         {/* Section 12 */}
-        <ActConverter />
+        <Reveal>
+          <ActConverter />
+        </Reveal>
         
         {/* Section 13 */}
-        <PolicyContent />
+        <Reveal>
+          <PolicyContent />
+        </Reveal>
         
         {/* Section 14 */}
-        <FaqSection />
+        <Reveal>
+          <FaqSection />
+        </Reveal>
         
         {/* Section 15 */}
-        <RelatedCalculators />
+        <Reveal>
+          <RelatedCalculators />
+        </Reveal>
       </main>
 
       {/* Section 16 */}
