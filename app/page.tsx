@@ -5,6 +5,8 @@ import { SiteHeader, CalculatorCore } from '@/components/CalculatorCore';
 import { ScoreDistributions, CollegeMatch, ScoreTiersVisual } from '@/components/DataVisuals';
 import { ConversionTables, PercentileTable } from '@/components/DataTables';
 import { SuperscoreCalculator, TargetScoreCalculator, ActConverter } from '@/components/BonusTools';
+import { PsatCalculator } from '@/components/PsatCalculator';
+import { ActCalculator } from '@/components/ActCalculator';
 import { EducationalContent, PolicyContent } from '@/components/InfoContent';
 import { FaqSection, RelatedCalculators, SiteFooter } from '@/components/FaqAndFooter';
 
@@ -53,51 +55,61 @@ export default function Home() {
         
         {/* Section 7 */}
         <Reveal>
-          <ConversionTables />
+          <PsatCalculator />
         </Reveal>
-        
+
         {/* Section 8 */}
         <Reveal>
-          <PercentileTable />
+          <ActCalculator />
         </Reveal>
-        
+
         {/* Section 9 */}
         <Reveal>
-          <EducationalContent />
+          <ConversionTables />
         </Reveal>
         
         {/* Section 10 */}
         <Reveal>
-          <SuperscoreCalculator />
+          <PercentileTable />
         </Reveal>
         
         {/* Section 11 */}
         <Reveal>
-          <TargetScoreCalculator />
+          <EducationalContent />
         </Reveal>
         
         {/* Section 12 */}
         <Reveal>
-          <ActConverter />
+          <SuperscoreCalculator />
         </Reveal>
         
         {/* Section 13 */}
         <Reveal>
-          <PolicyContent />
+          <TargetScoreCalculator />
         </Reveal>
         
         {/* Section 14 */}
         <Reveal>
-          <FaqSection />
+          <ActConverter />
         </Reveal>
         
         {/* Section 15 */}
+        <Reveal>
+          <PolicyContent />
+        </Reveal>
+        
+        {/* Section 16 */}
+        <Reveal>
+          <FaqSection />
+        </Reveal>
+        
+        {/* Section 17 */}
         <Reveal>
           <RelatedCalculators />
         </Reveal>
       </main>
 
-      {/* Section 16 */}
+      {/* Section 18 */}
       <SiteFooter />
     </>
   );

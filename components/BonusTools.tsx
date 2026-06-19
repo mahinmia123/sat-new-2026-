@@ -74,7 +74,7 @@ export function SuperscoreCalculator() {
 
           <div className="mt-6 bg-[#FFF8E1] border border-[#FFE082] rounded-lg p-4 text-[13px] text-[#F57F17] flex gap-3 leading-snug">
             <span className="font-bold">ⓘ</span>
-            <span>Over 90% of U.S. colleges and universities accept SAT superscoring. Always check each college's official admissions policy to confirm.</span>
+            <span>Over 90% of U.S. colleges and universities accept SAT superscoring. Always check each college&apos;s official admissions policy to confirm.</span>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ export function ActConverter() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-[28px] font-bold text-[#0A2342] mb-2">SAT to ACT Score Conversion</h2>
-          <p className="text-[#6B7280]">Convert between SAT and ACT scores using College Board's official concordance</p>
+          <p className="text-[#6B7280]">Convert between SAT and ACT scores using College Board&apos;s official concordance</p>
         </div>
 
         <div className="bg-white max-w-xl mx-auto rounded-3xl p-6 md:p-8 shadow-sm border border-[#E5E7EB]">

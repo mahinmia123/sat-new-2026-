@@ -18,6 +18,19 @@ export const rwScoreMap = [
   [50, 760], [54, 800]
 ];
 
+// PSAT Math map (Max 760)
+export const psatMathScoreMap = [
+  [0, 160], [5, 280], [10, 360], [15, 440], [20, 500],
+  [25, 560], [30, 620], [35, 670], [40, 730], [44, 760]
+];
+
+// PSAT R&W map (Max 760)
+export const psatRwScoreMap = [
+  [0, 160], [5, 250], [10, 330], [15, 390], [20, 440],
+  [25, 490], [30, 530], [35, 580], [40, 630], [45, 680], 
+  [50, 730], [54, 760]
+];
+
 // ACT Concordance Map
 export const actMap = [
   [1600, 36], [1540, 35], [1480, 34], [1420, 32], [1350, 30], 
@@ -37,7 +50,7 @@ function interpolate(val: number, map: number[][]) {
       return y1 + ratio * (y2 - y1);
     }
   }
-  return 200;
+  return map[0][1];
 }
 
 export function calculateSectionScore(rawM1: number, rawM2: number, difficulty: string, section: 'RW' | 'MATH') {
@@ -59,6 +72,25 @@ export function calculateSectionScore(rawM1: number, rawM2: number, difficulty: 
   return rounded;
 }
 
+export function calculatePsatSectionScore(rawM1: number, rawM2: number, difficulty: string, section: 'RW' | 'MATH') {
+  const totalRaw = rawM1 + rawM2;
+  const map = section === 'RW' ? psatRwScoreMap : psatMathScoreMap;
+  
+  let baseScore = interpolate(totalRaw, map);
+  
+  // Apply adaptive penalty/bonus if they performed reasonably on M1
+  if (totalRaw > 10) {
+    if (difficulty === 'Hard') baseScore += 10;
+    if (difficulty === 'Easy') baseScore -= 10;
+  }
+  
+  let rounded = Math.round(baseScore / 10) * 10;
+  if (rounded > 760) rounded = 760;
+  if (rounded < 160) rounded = 160;
+  
+  return rounded;
+}
+
 export function getPercentile(totalScore: number) {
   if (totalScore >= 1600) return "99th+";
   if (totalScore >= 1500) return "99th";
@@ -70,6 +102,26 @@ export function getPercentile(totalScore: number) {
   if (totalScore >= 950) return "36th";
   if (totalScore >= 870) return "25th";
   return "10th";
+}
+
+export function getPsatPercentile(totalScore: number) {
+  if (totalScore >= 1480) return "99th+";
+  if (totalScore >= 1420) return "99th";
+  if (totalScore >= 1350) return "95th";
+  if (totalScore >= 1250) return "89th";
+  if (totalScore >= 1150) return "75th";
+  if (totalScore >= 1050) return "58th";
+  if (totalScore >= 950) return "38th";
+  if (totalScore >= 850) return "21st";
+  return "10th";
+}
+
+export function getPsatTier(totalScore: number) {
+  if (totalScore >= 1350) return { label: "Exceptional", color: "#2E7D32" };
+  if (totalScore >= 1150) return { label: "Great", color: "#0097A7" };
+  if (totalScore >= 1000) return { label: "Good", color: "#1565C0" };
+  if (totalScore >= 850) return { label: "Average", color: "#F9A825" };
+  return { label: "Below Avg", color: "#C62828" };
 }
 
 export function getTier(totalScore: number) {

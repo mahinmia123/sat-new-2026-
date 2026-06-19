@@ -66,12 +66,12 @@ export function RelatedCalculators() {
           
           <div className="flex overflow-x-auto pb-6 gap-5 snap-x lg:grid lg:grid-cols-4 hide-scrollbar">
              {[
-               { icon: <FileText size={24} />, title: "PSAT Score Calculator", desc: "Convert your PSAT raw scores and check National Merit eligibility." },
-               { icon: <span className="font-bold text-2xl leading-none">A</span>, title: "ACT Score Calculator", desc: "Enter your correct answers and get your ACT composite score." },
-               { icon: <BarChart2 size={24} />, title: "SAT Score Chart 2025", desc: "Full raw-to-scaled score conversion tables for all test forms." },
-               { icon: <span className="font-bold text-2xl leading-none">⇄</span>, title: "SAT to ACT Converter", desc: "Official College Board concordance table — find your equivalent score." }
+               { icon: <FileText size={24} />, title: "PSAT Score Calculator", desc: "Convert your PSAT raw scores and check National Merit eligibility.", href: "#psat-calculator" },
+               { icon: <span className="font-bold text-2xl leading-none">A</span>, title: "ACT Score Calculator", desc: "Enter your correct answers and get your ACT composite score.", href: "#act-calculator" },
+               { icon: <BarChart2 size={24} />, title: "SAT Score Chart 2025", desc: "Full raw-to-scaled score conversion tables for all test forms.", href: "#score-conversion-table" },
+               { icon: <span className="font-bold text-2xl leading-none">⇄</span>, title: "SAT to ACT Converter", desc: "Official College Board concordance table — find your equivalent score.", href: "#sat-to-act" }
              ].map((item, i) => (
-                <div key={i} className="min-w-[260px] w-[260px] lg:w-auto snap-center shrink-0 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:border-[#0097A7] hover:shadow-md transition-all duration-300 group cursor-pointer flex flex-col items-start hover:-translate-y-1">
+                <a key={i} href={item.href} className="min-w-[260px] w-[260px] lg:w-auto snap-center shrink-0 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:border-[#0097A7] hover:shadow-md transition-all duration-300 group cursor-pointer flex flex-col items-start hover:-translate-y-1 block">
                    <div className="w-12 h-12 rounded-xl bg-[#F0F4F8] text-[#0097A7] group-hover:bg-[#0097A7] group-hover:text-white transition-colors flex items-center justify-center mb-5">
                       {item.icon}
                    </div>
@@ -80,7 +80,7 @@ export function RelatedCalculators() {
                    <button className="text-[13px] font-bold text-[#0097A7] uppercase tracking-wide group-hover:underline mt-auto">
                      Try Tool →
                    </button>
-                </div>
+                </a>
              ))}
           </div>
        </div>
@@ -93,7 +93,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-[#0A2342] text-white pt-16 pb-8 px-4">
       <div className="max-w-7xl mx-auto">
-         <div className="grid grid-cols-1 md:grid-cols-2 bg-red- ml lg:grid-cols-4 gap-10 mb-12">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             <div className="col-span-1 pr-6">
                <div className="flex items-center gap-2 mb-4">
                   <Calculator size={24} className="text-[#0097A7]" />
@@ -107,8 +107,8 @@ export function SiteFooter() {
             <div>
               <h4 className="font-bold text-[15px] mb-4 text-white uppercase tracking-wider">Calculators</h4>
               <ul className="space-y-3 text-[14px] text-[#9CA3AF]">
-                <li><a href="#" className="hover:text-[#0097A7] transition-colors">SAT Score Calculator</a></li>
-                <li><a href="#" className="hover:text-[#0097A7] transition-colors">PSAT Score Calculator</a></li>
+                <li><a href="#calculator" className="hover:text-[#0097A7] transition-colors">SAT Score Calculator</a></li>
+                <li><a href="#psat-calculator" className="hover:text-[#0097A7] transition-colors">PSAT Score Calculator</a></li>
                 <li><a href="#superscore" className="hover:text-[#0097A7] transition-colors">SAT Superscore Calculator</a></li>
                 <li><a href="#sat-to-act" className="hover:text-[#0097A7] transition-colors">SAT to ACT Converter</a></li>
               </ul>
@@ -117,9 +117,9 @@ export function SiteFooter() {
             <div>
               <h4 className="font-bold text-[15px] mb-4 text-white uppercase tracking-wider">Resources</h4>
               <ul className="space-y-3 text-[14px] text-[#9CA3AF]">
-                <li><a href="#good-sat-score" className="hover:text-[#0097A7] transition-colors">What is a Good SAT Score?</a></li>
+                <li><a href="#college-match" className="hover:text-[#0097A7] transition-colors">What is a Good SAT Score?</a></li>
                 <li><a href="#score-conversion-table" className="hover:text-[#0097A7] transition-colors">SAT Score Chart 2025</a></li>
-                <li><a href="#sat-percentile" className="hover:text-[#0097A7] transition-colors">SAT Percentile Rankings</a></li>
+                <li><a href="#score-percentiles" className="hover:text-[#0097A7] transition-colors">SAT Percentile Rankings</a></li>
                 <li><a href="#how-sat-scoring-works" className="hover:text-[#0097A7] transition-colors">How the SAT is Scored</a></li>
               </ul>
             </div>

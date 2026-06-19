@@ -8,9 +8,14 @@ export function ScoreDistributions() {
   
   // Dummy data demonstrating Albert.io style visual distributions
   const chartData = [
-    { range: "24-27", pct: 15 }, { range: "20-23", pct: 28, isUser: true }, 
-    { range: "16-19", pct: 32 }, { range: "12-15", pct: 18 }, { range: "0-11", pct: 7 }
+    { range: "24-27", pct: 15, desc: "Top performers. You have mastered this section's concepts." },
+    { range: "20-23", pct: 28, isUser: true, desc: "Strong performance. You are likely to score highly overall." },
+    { range: "16-19", pct: 32, desc: "Average performance. There is room for improvement on trickier questions." },
+    { range: "12-15", pct: 18, desc: "Below average. Reviewing fundamental concepts will help increase this score." },
+    { range: "0-11", pct: 7, desc: "Needs significant improvement. Focus deeply on foundational skills and question types." }
   ];
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section id="score-distribution" className="bg-[#F0F4F8] py-[60px] px-4">
@@ -35,14 +40,29 @@ export function ScoreDistributions() {
 
           <div className="space-y-4">
             {chartData.map((d, i) => (
-              <div key={i} className="flex items-center gap-4">
+              <div 
+                key={i} 
+                className="flex items-center gap-4 relative"
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
                 <div className="w-14 text-right text-sm font-bold text-[#0A2342]">{d.range}</div>
-                <div className="flex-1 overflow-hidden h-8 bg-[#F3F4F6] rounded-md relative flex items-center">
+                <div className="flex-1 h-8 bg-[#F3F4F6] rounded-md relative flex items-center cursor-help">
                   <div 
-                    className={`h-full flex items-center px-3 font-medium text-xs ${d.isUser ? 'bg-[#0A2342] text-white' : 'bg-gradient-to-r from-[#0097A7] to-[#80DEEA] text-white'}`} 
+                    className={`h-full flex items-center px-3 font-medium text-xs rounded-l-md ${d.pct * 2.5 === 100 ? 'rounded-r-md' : ''} ${d.isUser ? 'bg-[#0A2342] text-white' : 'bg-gradient-to-r from-[#0097A7] to-[#80DEEA] text-white'} transition-all`} 
                     style={{ width: `${d.pct * 2.5}%` }}>
                     {d.pct}%
                   </div>
+                  
+                  {hoveredIndex === i && (
+                    <div className="absolute left-0 top-10 w-64 bg-[#0A2342] text-white text-xs p-3 rounded-lg shadow-xl z-20 animate-in fade-in slide-in-from-top-2 duration-200">
+                      <div className="absolute -top-1.5 left-6 w-3 h-3 bg-[#0A2342] rotate-45"></div>
+                      <div className="relative z-10">
+                        <span className="font-bold text-sm block mb-1">Score Range {d.range} ({d.pct}% of students)</span>
+                        <span className="text-[#9CA3AF] leading-relaxed">{d.desc}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

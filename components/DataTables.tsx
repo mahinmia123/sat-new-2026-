@@ -115,7 +115,7 @@ export function PercentileTable() {
           </table>
         </div>
         <p className="text-xs text-[#6B7280] mt-4 max-w-3xl mx-auto text-center line-height-relaxed">
-          Percentile data sourced from College Board's most recent national score report. Rankings are approximate and may vary slightly by test year. A 74th percentile means you scored higher than 74% of the millions of students who took the exam.
+          Percentile data sourced from College Board&apos;s most recent national score report. Rankings are approximate and may vary slightly by test year. A 74th percentile means you scored higher than 74% of the millions of students who took the exam.
         </p>
       </div>
     </section>
