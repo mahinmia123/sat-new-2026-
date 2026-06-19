@@ -138,7 +138,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                     </div>
                     <span className="text-xs font-semibold bg-[#F3F4F6] text-[#4B5563] px-2 py-0.5 rounded-md">27 questions</span>
                   </div>
-                  <input type="range" min="0" max="27" value={rw1} onChange={e => setRw1(Number(e.target.value))} 
+                  <input type="range" min="0" max="27" value={rw1} onChange={e => { setRw1(Number(e.target.value)); setHasCalculated(false); }} 
                     className="w-full h-2 bg-[#E5E7EB] rounded-lg appearance-none cursor-pointer accent-[#0097A7]" />
                   <div className="text-right mt-1.5 font-bold text-[#0A2342] text-[15px]">{rw1} / 27 correct</div>
                 </div>
@@ -153,7 +153,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                     <span className="text-xs font-semibold bg-[#F3F4F6] text-[#4B5563] px-2 py-0.5 rounded-md">27 questions</span>
                   </div>
                   <div className="text-[13px] text-[#6B7280] italic mb-3 ml-4.5">(Difficulty depends on your Module 1 performance)</div>
-                  <input type="range" min="0" max="27" value={rw2} onChange={e => setRw2(Number(e.target.value))} 
+                  <input type="range" min="0" max="27" value={rw2} onChange={e => { setRw2(Number(e.target.value)); setHasCalculated(false); }} 
                     className="w-full h-2 bg-[#E5E7EB] rounded-lg appearance-none cursor-pointer accent-[#1565C0]" />
                   <div className="text-right mt-1.5 font-bold text-[#0A2342] text-[15px]">{rw2} / 27 correct</div>
                 </div>
@@ -167,7 +167,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                     </div>
                     <span className="text-xs font-semibold bg-[#F3F4F6] text-[#4B5563] px-2 py-0.5 rounded-md">22 questions</span>
                   </div>
-                  <input type="range" min="0" max="22" value={m1} onChange={e => setM1(Number(e.target.value))} 
+                  <input type="range" min="0" max="22" value={m1} onChange={e => { setM1(Number(e.target.value)); setHasCalculated(false); }} 
                     className="w-full h-2 bg-[#E5E7EB] rounded-lg appearance-none cursor-pointer accent-[#2E7D32]" />
                   <div className="text-right mt-1.5 font-bold text-[#0A2342] text-[15px]">{m1} / 22 correct</div>
                 </div>
@@ -182,7 +182,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                     <span className="text-xs font-semibold bg-[#F3F4F6] text-[#4B5563] px-2 py-0.5 rounded-md">22 questions</span>
                   </div>
                   <div className="text-[13px] text-[#6B7280] italic mb-3 ml-4.5">(Difficulty depends on your Module 1 performance)</div>
-                  <input type="range" min="0" max="22" value={m2} onChange={e => setM2(Number(e.target.value))} 
+                  <input type="range" min="0" max="22" value={m2} onChange={e => { setM2(Number(e.target.value)); setHasCalculated(false); }} 
                     className="w-full h-2 bg-[#E5E7EB] rounded-lg appearance-none cursor-pointer accent-[#7B1FA2]" />
                   <div className="text-right mt-1.5 font-bold text-[#0A2342] text-[15px]">{m2} / 22 correct</div>
                 </div>
@@ -193,7 +193,7 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                 <div className="text-[13px] font-semibold text-[#6B7280] mb-2 uppercase tracking-wider">Module 2 Difficulty (optional):</div>
                 <div className="flex gap-2">
                   {['Easy', 'Standard', 'Hard'].map(d => (
-                    <button key={d} onClick={() => setDiff(d)}
+                    <button key={d} onClick={() => { setDiff(d); setHasCalculated(false); }}
                       className={`flex-1 py-1.5 text-sm font-medium rounded-full transition-all border ${
                         diff === d ? 'bg-[#0097A7] text-white border-[#0097A7]' : 'bg-white text-[#4B5563] border-[#D1D5DB] hover:bg-[#F9FAFB]'
                       }`}>
@@ -230,7 +230,15 @@ export function CalculatorCore({ onCalculate }: { onCalculate: (score: any) => v
                   </div>
                 </div>
                 <div className="text-center mt-2">
-                  <span className="text-[#0A2342] font-bold text-xl tracking-tight">Est. Score: {curTotal.toLocaleString()}</span>
+                  <span className={`text-[#0A2342] font-semibold text-xs block mb-1 uppercase tracking-wider transition-all duration-300 ${!hasCalculated ? 'blur-[3px] select-none opacity-50' : ''}`}>Estimated Score</span>
+                  <span className={`text-[#0097A7] font-extrabold text-2xl tracking-tight transition-all duration-300 block ${!hasCalculated ? 'blur-[6px] select-none opacity-40 scale-95' : 'blur-none opacity-100 scale-100'}`}>
+                    {curTotal.toLocaleString()}
+                  </span>
+                  {!hasCalculated && (
+                    <p className="text-[11px] text-[#0097A7] font-semibold mt-1 bg-cyan-50 py-1 px-2 rounded-md inline-block border border-cyan-100 animate-pulse">
+                      Click &quot;Calculate My SAT Score →&quot; to unlock
+                    </p>
+                  )}
                 </div>
               </div>
 
