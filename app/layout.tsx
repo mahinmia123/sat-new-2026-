@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Free SAT Score Calculator - Digital SAT 2025 & 2026',
   description: 'Instantly calculate your Digital SAT score, view percentile rankings, and find college matches based on the 2025-2026 adaptive scoring curves.',
+  verification: {
+    google: 'A3szLLBajYvrMDviRm79kPNMr9egsH05JCwVe6sewqw',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
