@@ -34,6 +34,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
